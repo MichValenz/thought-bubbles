@@ -13,10 +13,10 @@ const ThoughtSchema = new Schema(
       default: Date.now,
       immutable: true,
     },
-    username: {
-      type: String,
-      required: true,
-    },
+    // username: {
+    //   type: String,
+    //   required: true,
+    // },
 
     reactions: [
       {
