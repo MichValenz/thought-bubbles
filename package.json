@@ -11,7 +11,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongoose": "^6.2.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichValenz/thought-bubbles.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MichValenz/thought-bubbles/issues"
+  },
+  "homepage": "https://github.com/MichValenz/thought-bubbles#readme"
 }
