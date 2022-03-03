@@ -4,6 +4,10 @@ const UserController = {
   // get all users
   getAllUsers(req, res) {
     User.find({})
+      .populate({
+        path: "thoughts",
+        select: "-__v",
+      })
       .then((userDB) => res.json(userDB))
       .catch((err) => {
         console.log(err);
@@ -16,10 +20,6 @@ const UserController = {
     User.findOne({ _id: params.id })
       .populate({
         path: "thoughts",
-        select: "-__v",
-      })
-      .populate({
-        path: "users",
         select: "-__v",
       })
       .select("-__v")
@@ -67,6 +67,16 @@ const UserController = {
       })
       .catch((err) => res.status(400).json(err));
   },
+
+  // removeThought({ params }, res) {
+  //   User.findOneAndUpdate(
+  //     { _id: params.id },
+  //     { $pull: { thoughts: { _id: params.id } } },
+  //     { new: true }
+  //   )
+  //     .then((userData) => res.json(userData))
+  //     .catch((err) => res.json(err));
+  // },
 };
 
 module.exports = UserController;
