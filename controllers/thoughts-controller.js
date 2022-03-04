@@ -1,7 +1,19 @@
 const { Thought, User } = require("../models");
 
 const ThoughtController = {
-  // add comment to pizza
+  getAllThoughts(req, res) {
+    Thought.find({})
+      // .populate({
+      //   path: "reactions",
+      //   select: "-__v",
+      // })
+      .then((userDB) => res.json(userDB))
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
+
   addThought({ params, body }, res) {
     console.log(body);
     Thought.create(body)
