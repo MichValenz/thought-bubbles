@@ -7,7 +7,7 @@ const ThoughtController = {
         path: "reactions",
         select: "-__v",
       })
-      .then((userDB) => res.json(userDB))
+      .then((thoughtDB) => res.json(thoughtDB))
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
@@ -21,17 +21,29 @@ const ThoughtController = {
         select: "-__v",
       })
       .select("-__v")
-      .then((userDB) => {
-        if (!userDB) {
+      .then((thoughtDB) => {
+        if (!thoughtDB) {
           res.status(404).json({ message: "No thought found with this id!" });
           return;
         }
-        res.json(userDB);
+        res.json(thoughtDB);
       })
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
       });
+  },
+
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true })
+      .then((thoughtDB) => {
+        if (!thoughtDB) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
+        }
+        res.json(thoughtDB);
+      })
+      .catch((err) => res.status(400).json(err));
   },
 
   addThought({ params, body }, res) {
