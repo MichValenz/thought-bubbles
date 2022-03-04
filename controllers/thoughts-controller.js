@@ -3,11 +3,31 @@ const { Thought, User } = require("../models");
 const ThoughtController = {
   getAllThoughts(req, res) {
     Thought.find({})
-      // .populate({
-      //   path: "reactions",
-      //   select: "-__v",
-      // })
+      .populate({
+        path: "reactions",
+        select: "-__v",
+      })
       .then((userDB) => res.json(userDB))
+      .catch((err) => {
+        console.log(err);
+        res.status(400).json(err);
+      });
+  },
+
+  getThoughtById({ params }, res) {
+    Thought.findOne({ id: params.thoughtId })
+      .populate({
+        path: "reactions",
+        select: "-__v",
+      })
+      .select("-__v")
+      .then((userDB) => {
+        if (!userDB) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
+        }
+        res.json(userDB);
+      })
       .catch((err) => {
         console.log(err);
         res.status(400).json(err);
