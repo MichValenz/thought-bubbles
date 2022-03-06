@@ -95,16 +95,6 @@ const UserController = {
       .then((friendData) => res.json(friendData))
       .catch((err) => res.json(err));
   },
-
-  // removeThought({ params }, res) {
-  //   User.findOneAndUpdate(
-  //     { _id: params.id },
-  //     { $pull: { thoughts: { _id: params.id } } },
-  //     { new: true }
-  //   )
-  //     .then((userData) => res.json(userData))
-  //     .catch((err) => res.json(err));
-  // },
 };
 
 module.exports = UserController;
