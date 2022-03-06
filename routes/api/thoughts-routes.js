@@ -13,9 +13,15 @@ router.route("/:userId").post(addThought);
 
 router.route("/").get(getAllThoughts);
 
-router.route("/:thoughtId").get(getThoughtById).put(updateThought);
+// router.route("/:id")
+//   .get(getThoughtById)
+  
+//   .delete(removeThought);
 
-router.route("/:userId/:thoughtId").put(addReaction).delete(removeThought);
+router.route("/:userId/:thoughtId").put(updateThought)
+  .post(addReaction).delete(removeThought);
+
+router.route("/:thoughtId").get(getThoughtById);
 
 router.route("/:userId/:thoughtId/:reactionId").delete(removeReaction);
 

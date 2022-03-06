@@ -21,7 +21,7 @@ const ThoughtController = {
         select: "-__v",
       })
       .select("-__v")
-      .then((thoughtDB) => {
+      .then(thoughtDB => {
         if (!thoughtDB) {
           res.status(404).json({ message: "No thought found with this id!" });
           return;
@@ -58,7 +58,9 @@ const ThoughtController = {
       })
       .then((userData) => {
         if (!userData) {
-          res.status(404).json({ message: "No user found with this id!" });
+          res
+            .status(404)
+            .json({ message: "No thought bubble found with this id!" });
           return;
         }
         res.json(userData);
@@ -69,32 +71,35 @@ const ThoughtController = {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $push: { reactions: body } },
-      { new: true }
+      { new: true}
     )
-      .then((userData) => {
-        if (!userData) {
-          res.status(404).json({ message: "No user found with this id!" });
+      .then(reactionData => {
+        if (!reactionData) {
+          res.status(404).json({ message: "No thought bubble found with this id!" });
           return;
         }
-        res.json(userData);
+        res.json(reactionData);
       })
       .catch((err) => res.json(err));
   },
   removeThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.thoughtId })
+    Thought.findOneAndDelete(
+      { _id: params.thoughtId })
       .then((deletedThought) => {
         if (!deletedThought) {
           return res.status(404).json({ message: "No thought with this id!" });
         }
         return User.findOneAndUpdate(
           { _id: params.userId },
-          { $pull: { thoughts: params.thoughtId } },
+          { $pull: { thoughts: params.id } },
           { new: true }
         );
       })
       .then((userData) => {
         if (!userData) {
-          res.status(404).json({ message: "No user found with this id!" });
+          res
+            .status(404)
+            .json({ message: "No thought bubble found with this id!" });
           return;
         }
         res.json(userData);
