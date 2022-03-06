@@ -58,7 +58,7 @@ const UserController = {
   addFriend({ params, body }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
-      { $push: { friends: body } },
+      { $push: { friends: params.friendId } },
       { new: true }
     )
       .then((userData) => {
@@ -70,6 +70,7 @@ const UserController = {
       })
       .catch((err) => res.json(err));
   },
+
   // delete user
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.userId })
@@ -81,6 +82,18 @@ const UserController = {
         res.json(userDB);
       })
       .catch((err) => res.status(400).json(err));
+  },
+
+  removeFriend({ params }, res) {
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $pull: { friends: params.friendId } },
+      { new: true }
+    )
+      .populate({ path: "friends", select: "-__v" })
+      .select("-__v")
+      .then((friendData) => res.json(friendData))
+      .catch((err) => res.json(err));
   },
 
   // removeThought({ params }, res) {
