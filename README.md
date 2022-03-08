@@ -31,6 +31,14 @@ No contributions.
 
 Use Insomnia or another route testing appliction to test routes.
 
+## Walkthrough Videos
+Part 1: https://drive.google.com/file/d/1IlKZFOUHEWbYdrvtWzs2nlI-ca3Nq9jg/view?usp=sharing
+
+
+Part 2: https://drive.google.com/file/d/1tw1ByRCOiRnvKi3kPPu_6NYwcykT3KEc/view?usp=sharing
+
+
+
 ## License
 
 This project has an MIT license.
